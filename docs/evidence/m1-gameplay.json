@@ -1,0 +1,14 @@
+{
+  "when": "2026-10-09T09:35:46.613Z",
+  "conditions": {
+    "viewport": "320x180 and 200x120, low quality, SwiftShader software GL, 2 vCPU",
+    "fps": 4.2,
+    "note": "software GL runs at a few fps; the design controller clamps each frame to 50 ms, so this checks logic and agreement, not real-time feel"
+  },
+  "passed": 7,
+  "total": 7,
+  "prediction": {
+    "corrections": 0,
+    "maxErrorM": 0
+  }
+}

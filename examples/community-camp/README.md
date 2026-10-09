@@ -1,0 +1,1 @@
+Independent-builder acceptance task: create a small camp model and one interaction using the documented manifest. Use assigned plot and bounds. Submit draft, publish through authorized route, and update version. Core scene edits should not be necessary. Claude must fill in runnable SDK instructions once implemented.

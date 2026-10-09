@@ -1,0 +1,18 @@
+import { chromium } from "playwright";
+const b = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE, args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--no-sandbox"] });
+const ctx = await b.newContext({ viewport: { width: 1000, height: 560 } });
+const page = await ctx.newPage();
+await page.goto("http://localhost:5173/#city");
+await page.fill("#nick", "TourE2E"); await page.press("#nick", "Enter");
+await page.waitForFunction(() => window.__zg?.conn().status === "connected", null, { timeout: 60000 });
+await page.waitForTimeout(3000);
+await page.evaluate(() => window.__zg.game.startTour());
+await page.waitForTimeout(4000);
+await page.screenshot({ path: "tests/e2e/out/w-tour-globe.png" });
+await page.evaluate(() => { const g = window.__zg.game; g.tour.t = 6.9; });
+await page.waitForTimeout(6000);
+await page.evaluate(() => { const g = window.__zg.game; g.tour.t = 20; });
+await page.waitForTimeout(5000);
+await page.screenshot({ path: "tests/e2e/out/w-tour-city.png" });
+console.log(await page.evaluate(() => JSON.stringify(window.__zg.game.ui.tour.caption)));
+await b.close();

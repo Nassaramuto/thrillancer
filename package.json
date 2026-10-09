@@ -1,0 +1,37 @@
+{
+  "name": "thrillancer",
+  "private": true,
+  "version": "0.1.0",
+  "description": "THRILLANCER proof of concept: a community-built crypto-culture plaza.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n db,server,web -c gray,cyan,magenta \"npm run db:dev\" \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:app": "concurrently -k -n server,web -c cyan,magenta \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm run dev -w @thrillancer/server",
+    "dev:web": "npm run dev -w @thrillancer/web",
+    "db:dev": "node scripts/dev-db.mjs",
+    "db:migrate": "npm run migrate -w @thrillancer/server",
+    "build": "npm run build -w @thrillancer/contracts && npm run build -w @thrillancer/server && npm run build -w @thrillancer/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:e2e": "node tests/e2e/two-sessions.mjs",
+    "world:extract": "node scripts/extract-world.mjs"
+  },
+  "devDependencies": {
+    "@colyseus/sdk": "^0.18.5",
+    "@types/node": "^22.20.5",
+    "concurrently": "^9.2.0",
+    "embedded-postgres": "18.4.0-beta.17",
+    "playwright": "^1.64.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.3"
+  }
+}

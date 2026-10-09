@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install",
+  "buildCommand": "npm run build -w @thrillancer/contracts && npm run build -w @thrillancer/web",
+  "outputDirectory": "apps/web/dist",
+  "rewrites": [{ "source": "/((?!design/|assets/).*)", "destination": "/index.html" }]
+}

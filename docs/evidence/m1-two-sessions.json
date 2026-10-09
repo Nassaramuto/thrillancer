@@ -1,0 +1,124 @@
+{
+  "when": "2026-10-09T09:37:52.999Z",
+  "conditions": {
+    "browser": "141.0.7390.37",
+    "gl": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "viewport": "800x450 x2 contexts, low-quality mode",
+    "host": "2 vCPU x64 linux",
+    "network": "localhost (no WAN latency)",
+    "note": "Software-rendered WebGL (SwiftShader): FPS below is NOT representative of real laptops."
+  },
+  "measurements": {
+    "A": {
+      "fps": 1.8,
+      "frameP95": 566.6,
+      "drawCalls": 1054,
+      "triangles": 49951,
+      "rttMs": 36,
+      "corrections": 0,
+      "maxErrorM": 0
+    },
+    "B": {
+      "fps": 1.8,
+      "frameP95": 616.7,
+      "rttMs": 16,
+      "corrections": 0,
+      "maxErrorM": 0
+    }
+  },
+  "consoleErrors": {
+    "A": [
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    ],
+    "B": [
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+    ]
+  },
+  "results": [
+    {
+      "name": "both sessions enter as guests",
+      "ok": true,
+      "detail": "first session ready in 4506 ms"
+    },
+    {
+      "name": "real avatars visible to each other",
+      "ok": true,
+      "detail": "Guide Bot[bot], AliceE2E, BobE2E"
+    },
+    {
+      "name": "bot is labelled as npc",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "walking moves the avatar at plausible speed",
+      "ok": true,
+      "detail": "moved 1.03 m while W held ~4 s (the design controller clamps each frame to 50 ms, so at software-GL frame rates this is slow motion; it checks direction and an upper speed bound, not real-time speed)"
+    },
+    {
+      "name": "other session sees the same position",
+      "ok": true,
+      "detail": "A=(-2.0,8.2) B sees (-2.0,8.2)"
+    },
+    {
+      "name": "chat message delivered across sessions",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "chat rate limit is shown to the sender",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "teleport to the Colosseum entrance",
+      "ok": true,
+      "detail": "at (28.5,-9.6)"
+    },
+    {
+      "name": "Respawn returns to the square",
+      "ok": true,
+      "detail": "at (-0.1,7.8)"
+    },
+    {
+      "name": "profile card opens for another real player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh keeps server-issued guest identity",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "refresh does not duplicate the avatar",
+      "ok": true,
+      "detail": "B sees 1 avatar(s) named AliceE2E"
+    },
+    {
+      "name": "peer shown as disconnected (ghost) after socket drop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "SDK reconnect resumes the same seat without duplicates",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "dropped client returns to connected state",
+      "ok": true,
+      "detail": "connected"
+    },
+    {
+      "name": "rtt measured",
+      "ok": true,
+      "detail": "A 36 ms, B 16 ms (localhost)"
+    }
+  ]
+}

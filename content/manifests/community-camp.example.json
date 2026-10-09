@@ -1,0 +1,28 @@
+{
+  "experienceId": "genesis-community-camp",
+  "version": "0.1.0",
+  "title": "Community Camp",
+  "kind": "camp",
+  "authorId": "demo-builder",
+  "plotId": "genesis-plot-001",
+  "description": "Illustrative contribution; no live module yet.",
+  "assetUrl": "/assets/community-camp.glb",
+  "entryPoint": "community-camp",
+  "spawn": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "bounds": {
+    "width": 12,
+    "height": 10,
+    "depth": 12
+  },
+  "supportedFeatures": [
+    "profile",
+    "return-to-plaza"
+  ],
+  "durationEstimateSeconds": 120,
+  "integrationMode": "reviewed-first-party",
+  "publicationStatus": "draft"
+}

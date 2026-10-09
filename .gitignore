@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+*.log
+.data/
+tests/e2e/out/
+*.tsbuildinfo
+.DS_Store
+
+# local-only material
+references/
+_to_delete/
+.trash/

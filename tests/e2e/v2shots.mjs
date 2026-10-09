@@ -1,0 +1,43 @@
+// Visual capture of the live V2 client (not a test). Usage: node tests/e2e/v2shots.mjs
+import { chromium } from "playwright";
+const APP = process.env.APP_URL ?? "http://localhost:5173";
+const out = new URL("./out/", import.meta.url).pathname;
+const b = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE, args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--no-sandbox"] });
+const errs = [];
+async function session(nick, hash = "", w = 1280, h = 720) {
+  const ctx = await b.newContext({ viewport: { width: w, height: h } });
+  const page = await ctx.newPage();
+  page.on("pageerror", (e) => errs.push(nick + " pageerror: " + e.message));
+  page.on("console", (m) => m.type() === "error" && errs.push(nick + " console: " + m.text()));
+  await page.goto(APP + "/" + hash);
+  await page.fill("#nick", nick);
+  await page.click("button[type=submit]");
+  await page.waitForFunction(() => window.__zg?.stats().players >= 1 && window.__zg.conn().status === "connected", null, { timeout: 90000, polling: 500 });
+  return page;
+}
+const A = await session("Alice", "#city");
+await A.waitForTimeout(5000);
+await A.screenshot({ path: out + "w-spawn.png" });
+await A.keyboard.press("KeyM");
+await A.click(".zg-it >> text=Colosseum >> nth=0");
+await A.waitForTimeout(1500);
+await A.screenshot({ path: out + "w-route.png" });
+await A.click("text=Teleport now");
+await A.waitForTimeout(6000);
+await A.screenshot({ path: out + "w-colo.png" });
+await A.waitForTimeout(1500);
+await A.keyboard.press("KeyM");
+await A.click(".zg-it >> text=Moonport >> nth=0");
+await A.click("text=Teleport now");
+await A.waitForTimeout(6000);
+await A.screenshot({ path: out + "w-moon.png" });
+await A.evaluate(() => { const g = window.__zg.game; g.setView(Math.PI + 0.6, -0.9, 7); });
+await A.waitForTimeout(3000);
+await A.screenshot({ path: out + "w-lookup.png" });
+await A.evaluate(() => window.__zg.game.startTour());
+await A.waitForTimeout(9000);
+await A.screenshot({ path: out + "w-tour1.png" });
+await A.waitForTimeout(12000);
+await A.screenshot({ path: out + "w-tour2.png" });
+console.log(JSON.stringify(await A.evaluate(() => window.__zg.stats())), errs.filter((e) => !/fonts|ERR_|Failed to load resource/.test(e)));
+await b.close();
